@@ -22,7 +22,7 @@ html {
   display: flex;
   flex-direction: column;
   border: solid black 1px;
-  width: 50vw;
+  width: 30vw;
   height: 50vh;
 }
 
