@@ -21,19 +21,24 @@ function divide(num1, num2) {
 let leftOperand;
 let rightOperand;
 let operator;
+const topDisplay = document.querySelector(".total-inputs");
+
+function populateTopDisplay() {
+  topDisplay.innerText = `${leftOperand} ${operator} ${rightOperand}`;
+}
 
 function operate(leftOperand, rightOperand, operator) {
   switch (operator) {
-    case "add":
+    case "+":
       return add(leftOperand, rightOperand);
-    case "subtract":
+    case "-":
       return subtract(leftOperand, rightOperand);
-    case "multiply":
+    case "x":
       return multiply(leftOperand, rightOperand);
-    case "divide":
+    case "/":
       return divide(leftOperand, rightOperand);
     default:
-      return "Invalid operator";
+      return leftOperand || rightOperand;
   }
 }
 
@@ -63,8 +68,10 @@ numberKeys.forEach((key) => {
 });
 
 function operatorHandler(e) {
+  if (operator) {
+    equalsHandler();
+  }
   operator = e.target.innerText;
-  currentOutputDisplay.innerText = operator;
 }
 
 const operatorKeys = document.querySelectorAll(".operator");
@@ -72,9 +79,32 @@ operatorKeys.forEach((key) => {
   key.addEventListener("click", operatorHandler);
 });
 
-const equals = document.querySelector(".equals");
-equals.addEventListener("click", () => {
+function clearVariables() {
+  rightOperand = null;
+  leftOperand = null;
+  operator = null;
+}
+
+function equalsHandler() {
   console.log(`Left: ${leftOperand}`);
   console.log(operator);
   console.log(`Right: ${rightOperand}`);
+  if (leftOperand && rightOperand) {
+    populateTopDisplay();
+    leftOperand = operate(Number(leftOperand), Number(rightOperand), operator);
+    currentOutputDisplay.innerText = leftOperand;
+  }
+  if (rightOperand) {
+    rightOperand = null;
+  }
+}
+
+const equals = document.querySelector(".equals");
+equals.addEventListener("click", equalsHandler);
+
+const clear = document.querySelector(".clear");
+clear.addEventListener("click", () => {
+  clearVariables();
+  currentOutputDisplay.innerText = 0;
+  topDisplay.innerText = "";
 });
