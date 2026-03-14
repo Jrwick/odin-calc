@@ -14,13 +14,15 @@ function divide(num1, num2) {
   if (num2 == 0) {
     return "Error";
   } else {
-    return num1 / num2;
+    number = num1 / num2;
+    return number;
   }
 }
 
 let leftOperand;
 let rightOperand;
 let operator;
+let total;
 const topDisplay = document.querySelector(".total-inputs");
 
 function populateTopDisplay() {
@@ -89,10 +91,18 @@ function equalsHandler() {
   console.log(`Left: ${leftOperand}`);
   console.log(operator);
   console.log(`Right: ${rightOperand}`);
-  if (leftOperand && rightOperand) {
-    populateTopDisplay();
-    leftOperand = operate(Number(leftOperand), Number(rightOperand), operator);
-    currentOutputDisplay.innerText = leftOperand;
+  console.log(`Total: ${total}`);
+  if ((leftOperand && rightOperand) || total == 0) {
+    //populateTopDisplay();
+    total = operate(Number(leftOperand), Number(rightOperand), operator);
+    let totalRound;
+    if (total % 1 == 0) {
+      totalRound = total;
+    } else {
+      totalRound = total.toFixed(4);
+    }
+    currentOutputDisplay.innerText = totalRound;
+    leftOperand = total;
   }
   if (rightOperand) {
     rightOperand = null;
