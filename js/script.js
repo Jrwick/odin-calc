@@ -36,3 +36,45 @@ function operate(leftOperand, rightOperand, operator) {
       return "Invalid operator";
   }
 }
+
+function OperandHandler(e) {
+  let number = e.target.innerText;
+  if (!operator) {
+    if (!leftOperand) {
+      leftOperand = number;
+    } else {
+      leftOperand += number;
+    }
+    currentOutputDisplay.innerText = leftOperand;
+  } else {
+    if (!rightOperand) {
+      rightOperand = number;
+    } else {
+      rightOperand += number;
+    }
+    currentOutputDisplay.innerText = rightOperand;
+  }
+}
+
+const currentOutputDisplay = document.querySelector(".current-output");
+const numberKeys = document.querySelectorAll(".number");
+numberKeys.forEach((key) => {
+  key.addEventListener("click", OperandHandler);
+});
+
+function operatorHandler(e) {
+  operator = e.target.innerText;
+  currentOutputDisplay.innerText = operator;
+}
+
+const operatorKeys = document.querySelectorAll(".operator");
+operatorKeys.forEach((key) => {
+  key.addEventListener("click", operatorHandler);
+});
+
+const equals = document.querySelector(".equals");
+equals.addEventListener("click", () => {
+  console.log(`Left: ${leftOperand}`);
+  console.log(operator);
+  console.log(`Right: ${rightOperand}`);
+});
