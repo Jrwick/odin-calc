@@ -1,3 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
 html {
   background-color: rgb(125, 125, 125);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  border: solid black 1px;
+  width: 50vw;
+  height: 50vh;
+}
+
+.display-area {
+  display: flex;
+  flex: 1;
+  background-color: whitesmoke;
+  align-items: end;
+}
+
+.current-output {
+  flex: 1;
+  text-align: right;
+  font-size: 3em;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  flex: 4;
+  gap: 1px;
+}
+
+.button-row {
+  display: flex;
+  flex: 1;
+  gap: 1px;
+}
+
+.button-row :is(button, div) {
+  flex: 1 0 64px;
+  margin: 1px;
 }
